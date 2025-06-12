@@ -1,1 +1,7 @@
 Basic I/O Operations        --- FROM COHORT 3 Focusing on FullStack Web Dev. by HARKIRAT
+
+
+create promisefied version of
+--setTimeOut()
+--fetch
+--fs.readFile()
