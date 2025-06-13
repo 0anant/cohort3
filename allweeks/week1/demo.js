@@ -29,13 +29,33 @@
 //     console.log(contents3); 
 // });                             // ----it's running asynchronously
 
-const fs = require("fs");
+// const fs = require("fs");
 
-function print(err,data){
-    console.log(data);
+// function print(err,data){
+//     console.log("error is");
+//     console.log(err);
+//     console.log("data is");
+//     console.log(data);
+// }
+
+// fs.readFile("/Users/nisha/Desktop/cohort 3/demo pgm/allweeks/week1/a.txt", "utf-8", print);
+// fs.readFile("/Users/nisha/Desktop/cohort 3/demo pgm/allweeks/week1/b.txt", "utf-8", print);
+
+// console.log("Done!");            //it works asynchronously  o/p:  Done! , Hi there , Praveen here
+
+function timeout(){
+    console.log("click the butoon");
 }
 
-fs.readFile("a.txt", "utf-8", print);
-fs.readFile("b.txt", "utf-8", print);
+console.log("Hi there");
 
-console.log("Done!");
+setTimeout(timeout, 1000);
+
+console.log("Welcome to loupe");
+
+let c = 0;
+for(let i = 0; i<10000000 ; i++ ){
+    c = c+1;
+}
+
+console.log("expensive operation done!");
