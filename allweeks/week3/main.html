@@ -1,0 +1,21 @@
+<html>
+    <body id="body">
+        <h2>Todo 1</h2>
+        <h2>Todo 2</h2>
+        <h2>Todo 3</h2>
+        <input type="text">
+        <button onclick="appnedRandomTodo()">Append</button>
+    </body>
+    <script>
+        function appnedRandomTodo() {
+            let val1 =document.createElement('div');
+            const val2  = document.querySelector('input').value;
+            val1.innerHTML = val2
+            // const element = document.querySelector("h2");
+            // const parentElement = element.parentNode;
+            document.getElementById('body').appendChild(val1);
+            console.log(val1)
+        }
+
+    </script>
+</html>

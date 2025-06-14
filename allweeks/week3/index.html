@@ -9,15 +9,21 @@
 <body>
 
     <h1>ToDo List</h1>
-    <h4>1. Take class</h4>
-    <h4>2. Go out to eat</h4>
-    <h5 id = "typeHere"></h5>
+    <div>
+        <div id="todo-1">
+            <h4>1. Take class</h4>
+            <button onclick="deletetodo(1)">delete</button>
+        </div>
+        <div id="todo-2">
+            <h4>2. Go out to eat</h4>
+            <button onclick="deletetodo(2)">delete</button>
+            </div>
     <div>
         <input id = "addVal" type="text">
         <button onclick="add()">Add Todo</button>
-        <button onclick="del()">To Delete Todo</button>
+        <!-- <button onclick="del()">To Delete Todo</button> -->
     </div>
-    <script src="script.js">
+    <script>
 //         // document.querySelector('button').addEventListener('click', add);
 //         const ele1 = document.querySelectorAll('h4')[1];
 //         console.log(ele1)
@@ -34,6 +40,11 @@
 //             document.querySelector('h4').removeChild
 //         }
 //     }
+
+        function deletetodo(index){
+            const ele = document.getElementById("todo-" + index);
+            ele.parentNode.removeChild(ele);
+        }
     </script>
     
 </body>
