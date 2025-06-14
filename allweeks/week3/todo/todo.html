@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Todo</title>
+</head>
+<body id="body">
+
+    <input type="text" placeholder="type your todo here">
+    <button onclick="addme()">Add!</button>
+    <button onclick="deleteme()">Delete!</button>
+    <script>
+        function addme(){
+            let val1 = document.querySelector('input').value;
+            const div1 = document.createElement('div');
+            div1.innerHTML = val1;
+            document.getElementById('body').appendChild(div1);
+            console.log(div1);
+        }
+        function deleteme(){
+           const del1 = document.querySelector('div');
+           const parentofdel1 = del1.parentNode;
+           parentofdel1.removeChild(del1);
+           console.log(del1);
+        }
+    </script>
+</body>
+</html>
