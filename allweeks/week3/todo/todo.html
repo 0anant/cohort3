@@ -9,22 +9,41 @@
 <body id="body">
 
     <input type="text" placeholder="type your todo here">
-    <button onclick="addme()">Add!</button>
-    <button onclick="deleteme()">Delete!</button>
+    <button onclick="deleteme()">Add!</button>
+</body>
+    <!-- <button onclick="deleteme()">Delete!</button> -->
     <script>
-        function addme(){
-            let val1 = document.querySelector('input').value;
-            const div1 = document.createElement('div');
-            div1.innerHTML = val1;
-            document.getElementById('body').appendChild(div1);
-            console.log(div1);
+        // function addme(){
+        //     let val1 = document.querySelector('input').value;
+        //     const div1 = document.createElement('div');
+        //     div1.innerHTML = val1;
+        //     document.getElementById('body').appendChild(div1);
+        //     console.log(div1);
+        // }
+        let ctr = 1;
+        function delme(index){
+            
+            const element = document.getElementById('todo-' + index);
+            element.parentNode.removeChild(element);
+        //   const aD = document.getElementById('div')
+        //     const parentDiv = parentNode(aD);
+        // //   parentDev.removeChild(ad);
+        //   console.log(parentDiv);
         }
         function deleteme(){
-           const del1 = document.querySelector('div');
-           const parentofdel1 = del1.parentNode;
-           parentofdel1.removeChild(del1);
-           console.log(del1);
+            const del1 = document.querySelector('input');
+            const value = del1.value;
+            const newEle = document.createElement('div');
+            newEle.setAttribute("id", "todo-" + ctr);
+            ctr = ctr + 1;
+            newEle.innerHTML = "<div>" + value + "</div><button onclick = 'delme("+ ctr +")'>Delete</button>"; 
+
+            document.querySelector('body').appendChild(newEle);
+        //    const del1 = document.querySelector('div');
+        //    const parentofdel1 = del1.parentNode;
+        //    parentofdel1.removeChild(del1);
+        //    console.log(del1);
         }
     </script>
-</body>
+
 </html>
