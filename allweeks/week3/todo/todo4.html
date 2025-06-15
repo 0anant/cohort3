@@ -18,10 +18,11 @@
         todos.push({
             title: document.querySelector("input").value
         })
-        render()
+        render();
     }
     function deleteLastTodo(){
         todos.splice(todos.length -1, 1);
+        render();
     }
 
     function addComponent(todo){
@@ -38,9 +39,9 @@
     }
     function render(){
         document.querySelector("#todos").innerHTML = "";
-        for (let i =1 ;i < todos.length;i++){
-           const  divEl2 = addComponent(todos[i]);
-           document.querySelector("#todos").appendChild(divEl2);
+        for (let i =0 ;i < todos.length;i++){
+           const  element = addComponent(todos[i]);
+           document.querySelector("#todos").appendChild(element);
         }
     }
 </script>
