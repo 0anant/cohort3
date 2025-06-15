@@ -35,10 +35,12 @@
             const value = del1.value;
             const newEle = document.createElement('div');
             newEle.setAttribute("id", "todo-" + ctr);
-            ctr = ctr + 1;
+            
             newEle.innerHTML = "<div>" + value + "</div><button onclick = 'delme("+ ctr +")'>Delete</button>"; 
 
             document.querySelector('body').appendChild(newEle);
+
+            ctr = ctr + 1;
         //    const del1 = document.querySelector('div');
         //    const parentofdel1 = del1.parentNode;
         //    parentofdel1.removeChild(del1);

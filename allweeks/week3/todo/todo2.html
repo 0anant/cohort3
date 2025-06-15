@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo2</title>
+</head>
+<body>
+    <div>
+        <input type="text" placeholder="type your todo here">
+        <button onclick="add()">Add!</button>
+    </div>
+</body>
+<script>
+    function add(){
+        const inputVal = document.querySelector('input');
+        const val = inputVal.value;
+        const createEle = document.createElement('div')
+        createEle.innerHTML = "<div>" + val + "</div><button onclick = deleteme()>Delete!</button>";
+       document.querySelector('body').appendChild(createEle);
+    }
+</script>
+</html>
+
+            <!-- -------//instead of doing this messy code you can also use code in todo3.html -->
