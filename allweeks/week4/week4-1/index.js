@@ -6,19 +6,49 @@ const express = require("express");
 
 const app = express();
 
-function sum(n){
-    let ans = 0;
-    for (let i =0; i<=n; i++){
-        ans = ans +i;
-    }
-    return ans;
-}
+var users = [{
+    name: 'jhon',
+    kidneys: [{
+        healthy: false},
+        {
+            healthy: true
+        }]
+}];
+
 
 //route get
 app.get('/', (req, res) => {
-    const n = req.query.n;
-    const ans = sum(n);
-    res.send('Hi your ans is' + ans);
+    //logic to get no of kidneys and how many are heathy or not
+    const johnKidneys =users[0].kidneys;
+    const noOfKidneys =johnKidneys.length;
+    let noOfHealthyKidneys = 0;
+    for (let i =0; i<johnKidneys.length; i++){
+        if(johnKidneys[i].healthy){
+            noOfHealthyKidneys = noOfHealthyKidneys + 1;
+        }
+    }
+    let noOfUnheathyKidneys = noOfKidneys - noOfHealthyKidneys;
+    res.json({
+        johnKidneys,
+        noOfHealthyKidneys,
+        noOfUnheathyKidneys
+    });
+   
+})
+
+//route put
+app.put('/put', (req, res) => {
+
+})
+
+//route post
+app.post('/post', (req, res) => {
+
+})
+
+//route delete
+app.delete('/delete', (req, res) => {
+
 })
 
 app.listen(3000);
