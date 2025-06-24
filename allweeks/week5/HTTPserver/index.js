@@ -12,8 +12,8 @@ app.get('/multiply', (req, res) => {
 })
 
 app.get('/add', (req, res) => {
-    const a = req.query.a
-    const b = req.query.b
+    const a = parseInt(req.query.a)
+    const b = parseInt(req.query.b)
 
     res.json({
         ans: a+b
@@ -21,8 +21,8 @@ app.get('/add', (req, res) => {
 })
 
 app.get('/subtract', (req, res) => {
-    const a = req.query.a
-    const b = req.query.b
+    const a = parseInt(req.query.a)
+    const b = parseInt(req.query.b)
 
     res.json({
         ans: a-b
