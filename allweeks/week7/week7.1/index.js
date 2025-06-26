@@ -1,5 +1,7 @@
 const express = require("express");
-const {auth, JWT_SECRET } = require("./auth");
+const jwt =require("jsonwebtoken");
+const JWT_SECRET = "praveen@hungedupp";
+//const {auth, JWT_SECRET, jwt } = require("./auth");
 const { UserModel, TodoModel } = require("./db");
 const { default: mongoose } = require("mongoose");
 
@@ -36,8 +38,9 @@ app.post("/login", async (req, res) => {
     })
     console.log(user);
     if(user){
+        console.log(user);
         const token = jwt.sign({
-            id: user._id
+            id: user._id.toString()
         }, JWT_SECRET);
         res.json({
             token: token
@@ -50,12 +53,35 @@ app.post("/login", async (req, res) => {
 })
 
 app.post("/todo", auth, (req, res) => {
+    const userId = req.userID;
+
+    res.json({
+        userId: userId
+    })
 
 })
 
 app.get("/todos", auth, (req, res) => {
+    const userId = req.userID;
+
+    res.json({
+        userId: userId
+    })
 
 })
+function auth(req, res, next){
+    const token = req.headers.token
 
+    const response = jwt.verify(token, JWT_SECRET);
+
+    if(response){
+        req.userId = token.Id;
+        next()
+    }else{
+        res.status(403).json({
+            message:"Invalid credentials"
+        })
+    }
+}
 
 app.listen(3000);
