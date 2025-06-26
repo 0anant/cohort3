@@ -1,6 +1,5 @@
 const express = require("express");
-const jwt =require("jsonwebtoken");
-const JWT_SECRET = "praveen@hungedupp";
+const {auth, JWT_SECRET } = require("./auth");
 const { UserModel, TodoModel } = require("./db");
 const { default: mongoose } = require("mongoose");
 
@@ -50,11 +49,13 @@ app.post("/login", async (req, res) => {
     }
 })
 
-app.post("/todo", (req, res) => {
+app.post("/todo", auth, (req, res) => {
 
 })
 
-app.get("/todos", (req, res) => {
+app.get("/todos", auth, (req, res) => {
 
 })
+
+
 app.listen(3000);
