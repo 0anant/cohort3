@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth Website</title>
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
+<script>
+    async function signup(){
+       const username = document.querySelector('#user1').value;
+       const password = document.querySelector('#pass1').value;
+
+      await axios.post("http://localhost:3000/signup", {
+        username: username,
+        password: password
+       });
+       alert("You are signed in");
+    }
+
+     async function signin(){
+        const username = document.querySelector('#signinuser').value;
+       const password = document.querySelector('#signinpass').value;
+
+      const response = await axios.post("http://localhost:3000/signin", { username: username,
+        password: password
+     });
+     localStorage.setItem("token", response.data.token);
+
+     alert("you are signed in");
+}
+
+async function userinformation(){
+    await axios.get("https://localhost:3000/me", {
+        headers : {
+            token: localStorage.getItem("token")
+        }
+    })
+    document.getElementById('userinfo').innerHTML = response.data.username+ "Password: " + response.data.password
+}
+function logout(){
+    localStorage.removeItem("token");
+}
+userinformation();
+</script>
+<body>
+    <div>
+        singup
+        <input id="user1" type="text" name="username" placeholder="Username">
+        <input id="pass1" type="password" name="password" placeholder="Password">
+        <button onclick="signup()">Submit</button>
+    </div>
+    <div>
+        singin
+        <input id="signinuser" type="text" name="username" placeholder="Username">
+        <input id="signinpass" type="password" name="password" placeholder="Password">
+        <button onclick="signin()">Submit</button>
+    </div>
+    <div>
+        user information
+        <div id="userinfo"></div>
+    </div>
+    <div>
+        <button onclick="logout()">Logout</button>
+    </div>
+    
+</body>
+</html>

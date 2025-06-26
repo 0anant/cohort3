@@ -7,6 +7,26 @@ app.use(express.json());
 
 let users =[];
 
+function auth(req, res, next){
+    const token = req.headers.token;
+    const decode = jwt.verify(token, JWT_SECRET);
+    if(decode.username){
+        req.username = decode.username;
+         next()
+    }else{
+        res.json({
+            message:"Username does not exits"
+        })
+    }
+   
+}
+
+// app.use(auth());
+
+app.get("/", (req, res) => {
+    res.sendFile(__dirname + "/public/index.html")
+})
+
 app.post("/signup", (req, res) => {
     const username  = req.body.username
     const password = req.body.password
@@ -53,15 +73,12 @@ app.post("/signin", (req, res) => {
 })
 
 app.get("/me", (req, res) => {
-    const token = req.header.token
-    const decodedData = jwt.verify(token, JWT_SECRET);
-
+    
    // const username = decodedData.username;
-   if(decodedData.username){
     let foundUser = null;
 
     for(let i=0; i< users.length; i++){
-        if(users[i].username == decodedData.username){
+        if(users[i].username == decode.username){
             foundUser = users[i];
         }
     }
@@ -69,7 +86,7 @@ app.get("/me", (req, res) => {
         username: foundUser.username,
         password:foundUser.password
     })
-   }
+   
 
 
 })
