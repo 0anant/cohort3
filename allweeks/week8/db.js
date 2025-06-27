@@ -1,33 +1,42 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema();
+const { Schema } = mongoose;
+// const ObjectId = mongoose.ObjectId;
 
 
-const User = new Schema.create({
+const User = new Schema({
     name: String,
     email:String,
     password: String,
-    courses: String
+    userId: ObjectId
 });
 
-const Admin = new Schema.create({
+const Admin = new Schema({
     name:String,
+    lastName:String,
     email: String,
     password: String,
-
+    adminId: ObjectId
 });
 
-const Course = new Schema.create({
-    courses:Object
+const Course = new Schema({
+    courseId:Object,
+    title:String,
+    description: String,
+    price:Number,
+    imageUrl: String,
+    creatorId: ObjectId
 });
 
-const Purchse = new Schema.create({
-    purchseItem:Object
+const Purchase = new Schema({
+    purchseId:ObjectId,
+    coursesId:ObjectId,
+    userID:ObjectId
 });
 
-const AdminModel = new Schema.model('admin', Admin);
-const UserModel = new Schema.model('users', User);
-const CourseModel = new Schema.model('course', Course);
-const PurchaseModel = new Schema.model('admin', Purchase);
+const AdminModel =  mongoose.model('admin', Admin);
+const UserModel =  mongoose.model('users', User);
+const CourseModel =  mongoose.model('course', Course);
+const PurchaseModel =  mongoose.model('purchase', Purchase);
 
 module.exports = {
     AdminModel,
