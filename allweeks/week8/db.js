@@ -20,7 +20,6 @@ const Admin = new Schema({
 });
 
 const Course = new Schema({
-    courseId:ObjectId,
     title:String,
     description: String,
     price:Number,

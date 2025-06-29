@@ -78,8 +78,12 @@ adminRouter.post("/createCourse",adminAuth,  async (req, res) => {
 
 
 adminRouter.post("/deleteCourse", adminAuth, async(req, res) => {
-    const courseId = req.body.courseId
-    const deleteCourse = await CourseModel.findOne(courseId)
+    const courseId = req.courseId
+    const adminId = req.adminId
+    const deleteCourse = await CourseModel.findOne({
+        _id: courseId,
+        creatorId: adminId
+})
 
     if(!deleteCourse){
         res.json({
@@ -95,9 +99,25 @@ adminRouter.post("/deleteCourse", adminAuth, async(req, res) => {
    
 })
 
-adminRouter.post("/addCourseContent", (req, res) => {
+adminRouter.post("/addCourseContent", async (req, res) => {
     const { title, description, imageUrl, price, courseId } = req.body
-    
+
+    const adminId = req.userId
+
+    const courseUpdate = await CourseModel.updateOne({
+        _id: courseId,
+        creatorId: adminId
+    },{
+        title:title,
+        description:description,
+        price:price,
+        imageUrl:imageUrl,
+        course:courseId
+    })
+    res.json({
+        message:"Course Updated",
+        courseId: course._id
+    })
     
 })
 
