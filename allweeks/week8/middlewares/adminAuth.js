@@ -1,38 +1,38 @@
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = "hdgvdaky@kdhfjb";
+const { JWT_SECRET } = require("../config");
+const { JWT_SECRET_PASSWORD } = require("../config");
 
 function adminAuth(req, res, next){
-    const adminId = req.body.adminId
+    const token = req.headers.token
+    const decode = jwt.verify( token , JWT_SECRET_PASSWORD);
 
-    const response = AdminModel.findOne({
-        adminId : adminId
-    })
-    if(!response){
+    
+    if(!decode){
         res.status(403).json({
             message:"Invalid Admin Id"
         })
     }else{
-        res.json({
-            message:"Admin has logged in"
-        })
+       res.adminId = decode.indexOf;
+       next();
     }
 
 }
 
 function userAuth(req, res, next){
-    const userId = req.body.adminId
+    const token = req.headers.token
+    const decoded = jwt.verify(token, JWT_SECRET);
 
-    const response = UserModel.findOne({
-        userId : userId
-    })
-    if(!response){
+    if(!decoded){
         res.status(403).json({
             message:"Invalid User"
         })
     }else{
-        res.json({
-            message:"User has logged in"
-        })
+        res.userid = decoded.id
     }
 
+}
+
+module.exports = {
+    adminAuth,
+    userAuth
 }

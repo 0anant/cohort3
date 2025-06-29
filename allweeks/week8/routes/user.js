@@ -1,6 +1,10 @@
 const express = require("express");
 const Router = express.Router();
 
+const jwt  = require("jsonwebtoken")
+const { JWT_SECRET } = require("../config")
+
+
 // you can write
 //const { Router } = require("express");
 //it does the same thing as the above two lines
@@ -13,7 +17,7 @@ userRouter.post("/signup", auth, async (req, res) => {
     const password = req.body.password
     const course = req.body.course
 
-    UserModel.create({
+    await UserModel.create({
         email: email,
         password:password,
         name:name,
@@ -40,8 +44,11 @@ userRouter.post("/signin", auth, async (req, res) => {
             message:"Invalid credentials"
         })
     }else{
+        const token = jwt.sign({
+            id: userRouter._id
+        }, JWT_SECRET);
         res.json({
-            message:"You are signed in "
+            message:"token "
         })
     }
 
