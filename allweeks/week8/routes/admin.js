@@ -1,9 +1,10 @@
 const express = require("express");
-const { AdminModel } = require("../db");
+const { AdminModel, CourseModel } = require("../db");
 const Router = express.Router();
 
 const jwt = require("jsonwebtoken")
-const { JWT_SECRET_PASSWORD } = require("../config")
+const { JWT_SECRET_PASSWORD } = require("../config");
+const { adminAuth } = require("../middlewares/adminAuth");
 
 // you can write
 //const { Router } = require("express");
@@ -56,16 +57,48 @@ adminRouter.post("/login", adminAuth, async (req, res) => {
 })
     
 
-adminRouter.post("/createCourse", (req, res) => {
-    res.send('course endpoint');
+adminRouter.post("/createCourse",adminAuth,  async (req, res) => {
+    const adminId = req.userId
+
+    const { title, description, imageUrl, price, creatorId } = req.body;
+
+    await CourseModel.create({
+        title: title,
+        price:price,
+        description : description,
+        imageUrl: imageUrl,
+        creatorId: creatorId
+    })
+
+    res.json({
+        message:"Course Created",
+        courseId: course._id
+    })
 })
 
-adminRouter.post("/deleteCourse", (req, res) => {
-    res.send('deletecourse endpoint');
+
+adminRouter.post("/deleteCourse", adminAuth, async(req, res) => {
+    const courseId = req.body.courseId
+    const deleteCourse = await CourseModel.findOne(courseId)
+
+    if(!deleteCourse){
+        res.json({
+            message:"wrong C=courseId"
+        })
+    }else
+    {
+        CourseModel.delete(deleteCourse);
+        res.json({
+            message:"Course Deleted"
+        })
+    }
+   
 })
 
 adminRouter.post("/addCourseContent", (req, res) => {
-    res.send('added course content endpoint');
+    const { title, description, imageUrl, price, courseId } = req.body
+    
+    
 })
 
 module.exports = {
