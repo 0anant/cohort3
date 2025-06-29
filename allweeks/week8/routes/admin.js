@@ -61,7 +61,8 @@ adminRouter.post("/createCourse",adminAuth,  async (req, res) => {
     const adminId = req.userId
 
     const { title, description, imageUrl, price, creatorId } = req.body;
-
+    //watch creating a we3 saas  in 6 hours 
+    //for image pipeline
     await CourseModel.create({
         title: title,
         price:price,
@@ -91,7 +92,7 @@ adminRouter.post("/deleteCourse", adminAuth, async(req, res) => {
         })
     }else
     {
-        CourseModel.delete(deleteCourse);
+        CourseModel.deleteOne(deleteCourse);
         res.json({
             message:"Course Deleted"
         })
@@ -116,7 +117,7 @@ adminRouter.post("/addCourseContent", async (req, res) => {
     })
     res.json({
         message:"Course Updated",
-        courseId: course._id
+        courseId: courseId._id
     })
     
 })
