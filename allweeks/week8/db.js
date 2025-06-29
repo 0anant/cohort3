@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
-const { Schema } = mongoose;
-// const ObjectId = mongoose.ObjectId;
+mongoose.connect("mongodb+srv://jaaaan697:kPZHkvXoP0JVVRk0@cluster0.gwos7wf.mongodb.net/course-selling-app");
+const  Schema = mongoose.Schema;
+const ObjectId = mongoose.Types.ObjectId;
 
 
 const User = new Schema({
@@ -19,7 +20,7 @@ const Admin = new Schema({
 });
 
 const Course = new Schema({
-    courseId:Object,
+    courseId:ObjectId,
     title:String,
     description: String,
     price:Number,

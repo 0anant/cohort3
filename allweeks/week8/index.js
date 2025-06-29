@@ -6,7 +6,7 @@ const { adminRouter } = require("./routes/admin");
 const { courseRouter } = require("./routes/courses");
 
 
-mongoose.connect("");
+mongoose.connect("mongodb+srv://jaaaan697:kPZHkvXoP0JVVRk0@cluster0.gwos7wf.mongodb.net/course-selling-app");
 const app = express();
 
 app.use(express.json());
@@ -16,5 +16,12 @@ app.use("/admin", adminRouter);
 app.use("/courses", courseRouter);
 
 
+async function main(){
+    
+    await mongoose.connect("mongodb+srv://jaaaan697:kPZHkvXoP0JVVRk0@cluster0.gwos7wf.mongodb.net/course-selling-app")
+    app.listen(3000);
+    console.log("listening to port");
 
-app.listen(3000);
+}
+
+main();
