@@ -5,8 +5,6 @@ const { userRouter } = require("./routes/user");
 const { adminRouter } = require("./routes/admin");
 const { courseRouter } = require("./routes/courses");
 
-
-mongoose.connect("mongodb+srv://jaaaan697:kPZHkvXoP0JVVRk0@cluster0.gwos7wf.mongodb.net/course-selling-app");
 const app = express();
 
 app.use(express.json());
@@ -17,8 +15,8 @@ app.use("/courses", courseRouter);
 
 
 async function main(){
-    
-    await mongoose.connect("mongodb+srv://jaaaan697:kPZHkvXoP0JVVRk0@cluster0.gwos7wf.mongodb.net/course-selling-app")
+
+    await mongoose.connect(MONGO_URL)
     app.listen(3000);
     console.log("listening to port");
 
